@@ -20,9 +20,10 @@ public class AnimationData : IComponentData
 [DisallowMultipleComponent]
 public class PlayerAuthoring : MonoBehaviour
 {
-    public GameObject Prefab;
+    public GameObject AnimationPrefab;
 
     public float Speed = 1f;
+    public Animator Animator;
 
     class Baker : Baker<PlayerAuthoring>
     {
@@ -34,7 +35,7 @@ public class PlayerAuthoring : MonoBehaviour
             dataComponent.Speed = authoring.Speed;
 
             AnimationPrefab animationComponent = new AnimationPrefab();
-            animationComponent.Prefab = authoring.Prefab;
+            animationComponent.Prefab = authoring.AnimationPrefab;
 
             AddComponent(entity, dataComponent);
             AddComponentObject(entity, animationComponent);

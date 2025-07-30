@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
@@ -26,11 +27,9 @@ public partial struct PlayerAnimationMovementSystem : ISystem
 {
     public void OnUpdate(ref SystemState state)
     {
-        //var buffer = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.WorldUnmanaged);
-        var buffer = new EntityCommandBuffer(Allocator.Temp);
+        var buffer = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.WorldUnmanaged);
         foreach (var (anim, entity) in SystemAPI.Query<AnimationPrefab>().WithEntityAccess())
         {
-            Debug.Log(entity);
             GameObject animationObject = GameObject.Instantiate(anim.Prefab);
 
             AnimationData component = new AnimationData();
@@ -41,7 +40,6 @@ public partial struct PlayerAnimationMovementSystem : ISystem
 
             buffer.RemoveComponent<AnimationPrefab>(entity);
         }
-        buffer.Playback(state.EntityManager);
 
         foreach (var (animation, transform, input) in SystemAPI.Query<AnimationData, RefRO<LocalTransform>, RefRO<PlayerInput>>())
         {

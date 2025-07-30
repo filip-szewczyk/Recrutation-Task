@@ -8,9 +8,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2956046122700313860, guid: 515b2dd7c5b86fe46a88baad877638e5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3305032213910989822, guid: 515b2dd7c5b86fe46a88baad877638e5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4307158868458079114, guid: 515b2dd7c5b86fe46a88baad877638e5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6242786811382514660, guid: 515b2dd7c5b86fe46a88baad877638e5, type: 3}
       propertyPath: m_Name
-      value: Player1
+      value: Player1Old
+      objectReference: {fileID: 0}
+    - target: {fileID: 6345436275463096171, guid: 515b2dd7c5b86fe46a88baad877638e5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6766945601205737822, guid: 515b2dd7c5b86fe46a88baad877638e5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -52,6 +68,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6951290495077577121, guid: 515b2dd7c5b86fe46a88baad877638e5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7470726390283782007, guid: 515b2dd7c5b86fe46a88baad877638e5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8572398676950180647, guid: 515b2dd7c5b86fe46a88baad877638e5, type: 3}
       propertyPath: m_WarningMessage
       value: "\nBinding warning: Some generic clip(s) animate transforms that are
@@ -60,6 +84,10 @@ PrefabInstance:
         'Leg_Upper.R'\n\tTransform 'Toes.L'\n\tTransform 'Spine'\n\tTransform 'Arm_Upper.R'\n\tTransform
         'Arm_Upper.L'\n\tTransform 'Arm_Lower.R'\n\tTransform 'Hand.R'\n\tTransform
         'Hand.L'\n\tand more ...\n\tFrom animation clip 'Idle'"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8804489325986587659, guid: 515b2dd7c5b86fe46a88baad877638e5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -95,7 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eed98c217efa5a4c824e6735ae354ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 4657735145110179595, guid: 944df85d2f5f5984ea6af8931a2a017f, type: 3}
+  AnimationPrefab: {fileID: 4657735145110179595, guid: 944df85d2f5f5984ea6af8931a2a017f, type: 3}
   Speed: 4
 --- !u!114 &-2334061017642880610
 MonoBehaviour:

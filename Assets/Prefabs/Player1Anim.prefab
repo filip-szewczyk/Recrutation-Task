@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6242786811382514660, guid: 515b2dd7c5b86fe46a88baad877638e5, type: 3}
       propertyPath: m_Name
-      value: Male Young Guy Variant
+      value: Player1Anim
       objectReference: {fileID: 0}
     - target: {fileID: 6766945601205737822, guid: 515b2dd7c5b86fe46a88baad877638e5, type: 3}
       propertyPath: m_LocalPosition.x

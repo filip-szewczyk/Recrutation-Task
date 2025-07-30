@@ -84,12 +84,13 @@ public partial struct GoInGameServerSystem : ISystem
         PlayerSpawner spawner = SystemAPI.GetSingleton<PlayerSpawner>();
 
         // Get the prefab to instantiate
+        
         Entity prefab = new Entity();
         if (_spawnedPlayers == 0)
             prefab = spawner.Player1;
         if(_spawnedPlayers == 1)
             prefab = spawner.Player2;
-
+        
         var commandBuffer = new EntityCommandBuffer(Allocator.Temp);
         networkIdFromEntity.Update(ref state);
         
@@ -104,9 +105,6 @@ public partial struct GoInGameServerSystem : ISystem
             {
                 // Instantiate the prefab
                 var player = commandBuffer.Instantiate(prefab);
-
-                if (_spawnedPlayers == 1)
-                    state.EntityManager.SetComponentData(player, LocalTransform.FromPosition(spawner.SecondPlayerSpawningPosition));
 
                 // Associate the instantiated prefab with the connected client's assigned NetworkId
                 commandBuffer.SetComponent(player, new GhostOwner { NetworkId = networkId.Value });

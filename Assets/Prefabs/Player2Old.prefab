@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 880714636728156243, guid: 704e6059def12974b93a2246d7e71e9f, type: 3}
       propertyPath: m_Name
-      value: Player2
+      value: Player2Old
       objectReference: {fileID: 0}
     - target: {fileID: 5369719732237335417, guid: 704e6059def12974b93a2246d7e71e9f, type: 3}
       propertyPath: m_WarningMessage
@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eed98c217efa5a4c824e6735ae354ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 1864442404830163791, guid: 5e152d9fca888d6418f6fa9df2c6386b, type: 3}
+  AnimationPrefab: {fileID: 1864442404830163791, guid: 5e152d9fca888d6418f6fa9df2c6386b, type: 3}
   Speed: 4
 --- !u!114 &-7378294534094245170
 MonoBehaviour:
