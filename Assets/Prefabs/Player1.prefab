@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2941248244891798767
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5568920416123438613}
-  m_Layer: 0
-  m_Name: CameraTarget
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5568920416123438613
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2941248244891798767}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4112980870507963845}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4248352087790540742
 GameObject:
   m_ObjectHideFlags: 0
@@ -65,7 +34,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4452570505196180696}
-  - {fileID: 5568920416123438613}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3067336671740191337
@@ -80,10 +48,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eed98c217efa5a4c824e6735ae354ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CameraControl: {fileID: 0}
   AnimationPrefab: {fileID: 4657735145110179595, guid: 944df85d2f5f5984ea6af8931a2a017f, type: 3}
   CameraTarget: {fileID: 0}
   Speed: 4
-  CameraRotationSpeed: 2
+  CameraRotationSpeed: 4
   CameraMaxPitch: 40
   CameraMinPitch: 10
   Animator: {fileID: 6986784813427666888, guid: 944df85d2f5f5984ea6af8931a2a017f, type: 3}

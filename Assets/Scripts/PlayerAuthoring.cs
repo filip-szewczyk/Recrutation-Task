@@ -9,19 +9,15 @@ public struct Player : IComponentData
     public float MaxPitch;
     public float MinPitch;
 
+    //public float PitchAngle;
     public float YawAngle;
-    public float PitchAngle;
+
     public float Threshold;
 }
 
 public class CameraControl : IComponentData
 {
     public Transform TargetTransform;
-    public float RotationSpeed;
-    public float MaxPitch;
-    public float MinPitch;
-    public float Pitch;
-    public float Yaw;
 }
 
 public class AnimationPrefab : IComponentData
@@ -67,14 +63,9 @@ public class PlayerAuthoring : MonoBehaviour
             AnimationPrefab animComponent = new AnimationPrefab();
             animComponent.Prefab = authoring.AnimationPrefab;
 
-            CameraControl cameraControlComponent = new CameraControl();
-            cameraControlComponent.RotationSpeed = authoring.CameraRotationSpeed;
-            cameraControlComponent.MaxPitch = authoring.CameraMaxPitch;
-            cameraControlComponent.MinPitch = authoring.CameraMinPitch;
-
             AddComponent(entity, dataComponent);
             AddComponentObject(entity, animComponent);
-            AddComponentObject(entity, cameraControlComponent);
+            AddComponentObject(entity, new CameraControl());
         }
     }
 

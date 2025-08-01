@@ -1,4 +1,3 @@
-using Unity.Cinemachine;
 using Unity.Entities;
 using Unity.NetCode;
 using UnityEngine;
@@ -20,7 +19,7 @@ partial class CameraControlSystem : SystemBase
         if (_cameraSet)
             return;
 
-        foreach (var (target, entity) in SystemAPI.Query<CameraControl>().WithAll<GhostOwnerIsLocal>().WithEntityAccess())
+        foreach (var target in SystemAPI.Query<CameraControl>().WithAll<GhostOwnerIsLocal>())
         {
             target.TargetTransform = GameObject.FindGameObjectWithTag("CameraTarget").GetComponent<Transform>();
             _cameraSet = true;
