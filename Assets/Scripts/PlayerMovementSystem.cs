@@ -11,9 +11,6 @@ using UnityEngine;
 [BurstCompile]
 public partial struct PlayerMovementSystem : ISystem
 {
-    float3 _position;
-    quaternion _rotation;
-
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
@@ -41,32 +38,15 @@ public partial struct PlayerMovementSystem : ISystem
                 transform.ValueRW.Position += new float3(direction.normalized) * player.ValueRO.Speed * SystemAPI.Time.DeltaTime;
             }
         }
-
-        _position = new float3(0f, 0f, 0f);
-        _rotation = Quaternion.Euler(0f, 0f, 0f);
-        foreach (var (player, transform) in SystemAPI.Query<RefRO<Player>, RefRO<LocalTransform>>().WithAll<GhostOwnerIsLocal>())
-        {
-            _position = transform.ValueRO.Position;
-            _rotation = Quaternion.Euler(player.ValueRO.PitchAngle, player.ValueRO.YawAngle, 0f);
-        }
-
-        foreach (var (camControler, transform) in SystemAPI.Query<RefRO<CameraControler>, RefRW<LocalTransform>>())
-        {
-            transform.ValueRW.Position = _position;
-            transform.ValueRW.Rotation = _rotation;
-        } 
     }
 }
 
 [UpdateInGroup(typeof(SimulationSystemGroup))]
 public partial struct CameraMovementPrepareSystem : ISystem
 {
-    float _pitchAngle;
-    float _yawAngle;
-
     public void OnUpdate(ref SystemState state)
     {
-        foreach (var (camControl, playerData, transform, input) in SystemAPI.Query<CameraControl, RefRW<Player>, RefRO<LocalTransform>, RefRW<PlayerInput>>().WithAll<GhostOwnerIsLocal>())
+        foreach (var (camControl, playerData, transform) in SystemAPI.Query<CameraControl, RefRW<Player>, RefRO<LocalTransform>>().WithAll<GhostOwnerIsLocal>())
         {
             if (camControl.TargetTransform != null)
             {
@@ -104,7 +84,7 @@ public partial struct PlayerAnimationMovementSystem : ISystem
 
         foreach (var (player, animData, transform, input) in SystemAPI.Query<Player, AnimationData, RefRO<LocalTransform>, RefRO<PlayerInput>>())
         {
-            if (Utility.Magnitude(input.ValueRO.Movement) > player.Threshold)
+            if(!transform.ValueRO.Position.Equals(animData.Transform.position))
             {
                 animData.Transform.position = transform.ValueRO.Position;
 
