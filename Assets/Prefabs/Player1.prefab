@@ -48,7 +48,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eed98c217efa5a4c824e6735ae354ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CameraControl: {fileID: 0}
   AnimationPrefab: {fileID: 4657735145110179595, guid: 944df85d2f5f5984ea6af8931a2a017f, type: 3}
   CameraTarget: {fileID: 0}
   Speed: 4

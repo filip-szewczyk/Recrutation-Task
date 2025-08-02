@@ -11,27 +11,44 @@ using UnityEngine;
 [BurstCompile]
 public partial struct PlayerMovementSystem : ISystem
 {
+    float3 _position;
+    quaternion _rotation;
+
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
         foreach (var (input, player, transform) in SystemAPI.Query<RefRO<PlayerInput>, RefRW<Player>, RefRW<LocalTransform>>().WithAll<Simulate>())
         {
             player.ValueRW.YawAngle += input.ValueRO.Roatation.x * player.ValueRO.RotationSpeed;
-            //player.ValueRW.PitchAngle += input.ValueRO.Roatation.y * player.ValueRO.RotationSpeed;
+            player.ValueRW.PitchAngle += input.ValueRO.Roatation.y * player.ValueRO.RotationSpeed;
 
             player.ValueRW.YawAngle = Utility.ClampAngle(player.ValueRO.YawAngle, float.MinValue, float.MaxValue);
-            //player.ValueRW.PitchAngle = Utility.ClampAngle(player.ValueRO.PitchAngle, player.ValueRO.MinPitch, player.ValueRO.MaxPitch);
-
-            transform.ValueRW.Rotation = Quaternion.Euler(0f, player.ValueRO.YawAngle, 0f);
+            player.ValueRW.PitchAngle = Utility.ClampAngle(player.ValueRO.PitchAngle, player.ValueRO.MinPitch, player.ValueRO.MaxPitch);
 
             if (Utility.Magnitude(input.ValueRO.Movement) > player.ValueRO.Threshold)
             {
+                transform.ValueRW.Rotation = Quaternion.Euler(0f, player.ValueRO.YawAngle, 0f);
+
                 float angle = (float)Math.Atan2(input.ValueRO.Movement.x, input.ValueRO.Movement.y) * Mathf.Rad2Deg + player.ValueRO.YawAngle;
                 Vector3 direction = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
-                
+
                 transform.ValueRW.Position += new float3(direction.normalized) * player.ValueRO.Speed * SystemAPI.Time.DeltaTime;
             }
         }
+
+        _position = new float3(0f, 0f, 0f);
+        _rotation = Quaternion.Euler(0f, 0f, 0f);
+        foreach (var (player, transform) in SystemAPI.Query<RefRO<Player>, RefRO<LocalTransform>>().WithAll<GhostOwnerIsLocal>())
+        {
+            _position = transform.ValueRO.Position;
+            _rotation = Quaternion.Euler(player.ValueRO.PitchAngle, player.ValueRO.YawAngle, 0f);
+        }
+
+        foreach (var (camControler, transform) in SystemAPI.Query<RefRO<CameraControler>, RefRW<LocalTransform>>())
+        {
+            transform.ValueRW.Position = _position;
+            transform.ValueRW.Rotation = _rotation;
+        } 
     }
 }
 
@@ -40,12 +57,21 @@ public partial struct CameraMovementPrepareSystem : ISystem
 {
     public void OnUpdate(ref SystemState state)
     {
+        float3 _position = new float3(0f, 0f, 0f);
+        quaternion _rotation = Quaternion.Euler(0f, 0f, 0f);
+
+        foreach (var (camControler, transform) in SystemAPI.Query<RefRO<CameraControler>, RefRW<LocalTransform>>())
+        {
+            _position = transform.ValueRW.Position;
+            _rotation = transform.ValueRW.Rotation;
+        } 
+
         foreach (var (camControl, transform) in SystemAPI.Query<CameraControl, RefRO<LocalTransform>>().WithAll<GhostOwnerIsLocal>())
         {
             if (camControl.TargetTransform != null)
             {
-                camControl.TargetTransform.position = transform.ValueRO.Position;
-                camControl.TargetTransform.rotation = transform.ValueRO.Rotation;
+                camControl.TargetTransform.position = _position;
+                camControl.TargetTransform.rotation = _rotation;
             }
         }
     }

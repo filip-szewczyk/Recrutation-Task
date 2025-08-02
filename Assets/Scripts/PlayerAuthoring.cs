@@ -9,7 +9,7 @@ public struct Player : IComponentData
     public float MaxPitch;
     public float MinPitch;
 
-    //public float PitchAngle;
+    public float PitchAngle;
     public float YawAngle;
 
     public float Threshold;
